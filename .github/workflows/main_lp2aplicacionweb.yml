@@ -77,4 +77,4 @@ jobs:
         with:
           app-name: 'lp2aplicacionweb'
           slot-name: 'Production'
-          package: 'java-app/*.jar'
+          path: ${{ github.workspace }}/target/*.jar
