@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Formulario Cliente</title>
+    <style>
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #fff;
+            padding: 2.5rem 3rem;
+            max-width: 450px;
+            width: 90%;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: #34495e;
+        }
+
+        input[type="text"] {
+            padding: 0.6rem 0.8rem;
+            font-size: 1rem;
+            border: 1.8px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 1.3rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.4);
+            outline: none;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            font-weight: 700;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 1.6rem;
+            color: #3498db;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            .container {
+                padding: 1.5rem 1.8rem;
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 th:text="${cliente.idcli == 0} ? 'Nuevo Cliente' : 'Editar Cliente'">Nuevo Cliente</h2>
+
+    <form th:action="@{/guardar}" th:object="${cliente}" method="post">
+        <input type="hidden" th:field="*{idcli}" />
+        
+        <label for="nomcli">Nombre:</label>
+        <input type="text" id="nomcli" th:field="*{nomcli}" placeholder="Ingresa el nombre" required />
+
+        <label for="apecli">Apellido:</label>
+        <input type="text" id="apecli" th:field="*{apecli}" placeholder="Ingresa el apellido" required />
+
+        <label for="dnicli">DNI:</label>
+        <input type="text" id="dnicli" th:field="*{dnicli}" placeholder="Número de DNI" required />
+
+        <label for="dircli">Dirección:</label>
+        <input type="text" id="dircli" th:field="*{dircli}" placeholder="Dirección completa" required />
+
+        <button type="submit">Guardar</button>
+    </form>
+
+    <a href="/listar">← Volver a la lista</a>
+</div>
+</body>
+</html>
